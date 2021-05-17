@@ -12,7 +12,7 @@
     
     NSInteger count = 0;
     for (int j = 0; j<array.count; j++) {
-        for (int i = j; i<array.count; i++) {
+        for (int i = j+1; i<array.count; i++) {
             if(abs([array[j] intValue] - [array[i] intValue]) == [number intValue]) {
                 count++;
             }

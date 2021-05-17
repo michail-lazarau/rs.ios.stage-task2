@@ -23,27 +23,28 @@
         }
     }
     
-    [combineIntegers sortUsingSelector:@selector(compare:)];
-    [combineStrings sortUsingSelector:@selector(compare:)];
+    //[combineIntegers sortedArrayUsingSelector:@selector(compare:)];
+    //[combineStrings sortedArrayUsingSelector:@selector(compare:) == NSOrderedDescending];
     
     if (combineStrings.count && combineIntegers.count != 0)
     {
-        return @[[combineIntegers copy],
-                 [combineStrings copy]];
+        return @[[[combineIntegers sortedArrayUsingSelector:@selector(compare:)] copy],
+                 [[combineStrings sortedArrayUsingDescriptors:
+                  [NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"self" ascending:NO], nil]] copy]];
     }
     else if (combineIntegers.count != 0)
     {
-        return [combineIntegers copy];
+        return [[combineIntegers sortedArrayUsingSelector:@selector(compare:)] copy];
     }
     else if (combineStrings.count != 0)
     {
-        return [combineStrings copy];
+        return [[combineStrings sortedArrayUsingSelector:@selector(compare:)] copy];
     }
     return nil;
 }
 
 // как создать компаратор отдельно?
-//combineStrings sortedArrayUsingComparator:<#^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2)cmptr#>
+//combineStrings sortedArrayUsingComparator:
 // сортировка с помощью дескриптора
 // NSSortDescriptor *naturalSorting = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
 // [combineStrings sortUsingDescriptors:[NSArray arrayWithObject:naturalSorting]];
